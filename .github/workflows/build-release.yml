@@ -1,0 +1,50 @@
+name: Build and Release
+
+on:
+  release:
+    types: [released]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Archive build output
+        run: tar -czf dist.tar.gz .
+
+      - name: Upload build artifact (for workflow logs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Create GitHub Release and upload asset
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: release-${{ github.run_id }}
+          name: Release ${{ github.run_number }}
+          body: |
+            Automated release for commit ${{ github.sha }} on branch ${{ github.ref_name }}.
+            - Trigger: push to main
+            - Run number: ${{ github.run_number }}
+          artifacts: dist.tar.gz
+          allowUpdates: false
+          draft: false
+          prerelease: false
+          makeLatest: true
