@@ -18,13 +18,18 @@ fi
 
 
 # 3. Install missing packages
-echo "📦 Installing required npm packages..."
+echo "📦 Checking npm packages..."
 
 npm install -g pm2
 
-npm install dotenv express axios
-
-echo "✅ Packages installed."
+# Only install if node_modules doesn't exist
+if [ ! -d "node_modules" ]; then
+    echo "📦 Installing npm packages..."
+    npm install
+    echo "✅ Packages installed."
+else
+    echo "✅ Packages already installed (node_modules exists)."
+fi
 
 # 4. Start proxy (if not already)
 pm2 start proxyServer.js --name proxy-service || true

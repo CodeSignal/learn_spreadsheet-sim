@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm spreadsheet.json
+rm  -fspreadsheet.json
 node spreadsheetToJson.js
 cat spreadsheet.json
