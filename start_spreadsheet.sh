@@ -20,8 +20,6 @@ fi
 # 3. Install missing packages
 echo "📦 Checking npm packages..."
 
-npm install -g pm2
-
 # Only install if node_modules doesn't exist
 if [ ! -d "node_modules" ]; then
     echo "📦 Installing npm packages..."
@@ -32,7 +30,7 @@ else
 fi
 
 # 4. Start proxy (if not already)
-pm2 start proxyServer.js --name proxy-service || true
+npx pm2 start proxyServer.js --name proxy-service || true
 
 # 5. Run setup.js
 echo "🚀 Running setup.js..."
