@@ -1,0 +1,14 @@
+spreadsheetURL: https://docs.google.com/spreadsheets/d/1ouStwWebpGQSREQSGpceyg8HgKHrDLZ6ONTja4FU-ug/
+cellsToVerify:
+  - cellName: C4
+    expectedValue: iPhone 16
+  - cellName: D9
+    expectedValue: "5"
+  - cellName: B14
+    expectedValue: Charlie Davis
+  - cellName: E18
+    expectedValue: "1820"
+  - cellName: D53
+    expectedFunction: =SUM(D2:D51)
+  - cellName: ""
+    expectedFunction: ""

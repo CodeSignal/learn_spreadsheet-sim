@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Configuration Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Fonts (Work Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Design System Foundations -->
+  <link rel="stylesheet" href="./design-system/colors/colors.css">
+  <link rel="stylesheet" href="./design-system/spacing/spacing.css">
+  <link rel="stylesheet" href="./design-system/typography/typography.css">
+
+  <!-- Design System Components -->
+  <link rel="stylesheet" href="./design-system/components/button/button.css">
+  <link rel="stylesheet" href="./design-system/components/boxes/boxes.css">
+  <link rel="stylesheet" href="./design-system/components/input/input.css">
+  <link rel="stylesheet" href="./design-system/components/dropdown/dropdown.css">
+  <link rel="stylesheet" href="./design-system/components/tags/tags.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--Colors-Backgrounds-Main-Default);
+      font-family: var(--body-family);
+      color: var(--Colors-Text-Body-Default);
+      min-height: 100vh;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: var(--UI-Spacing-spacing-l) var(--UI-Spacing-spacing-xl);
+      background: var(--Colors-Box-Background);
+      border-bottom: 1px solid var(--Colors-Box-Stroke);
+      gap: var(--UI-Spacing-spacing-m);
+    }
+
+    .header h1 {
+      margin: 0;
+      color: var(--Colors-Text-Body-Strong);
+    }
+
+    #app {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--UI-Spacing-spacing-xl);
+    }
+
+    .config-editor h3 {
+      font-size: var(--Fonts-Body-Default-md);
+      font-weight: 600;
+      color: var(--Colors-Text-Body-Strong);
+    }
+
+    .cell-item {
+      transition: border-color 0.2s ease;
+    }
+
+    .cell-item:hover {
+      border-color: var(--Colors-Box-Stroke-Hover);
+    }
+
+    #spreadsheet-url {
+      min-width: 0;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body class="bespoke">
+  <!-- Navigation Header -->
+  <header class="header">
+    <h1 class="heading-large">Spreadsheet Configuration</h1>
+  </header>
+
+  <!-- Main Application Content -->
+  <main id="app">
+    <div style="text-align: center; padding: var(--UI-Spacing-spacing-xl);">
+      Loading configuration...
+    </div>
+  </main>
+
+  <!-- Core Scripts -->
+  <script src="./app.js"></script>
+</body>
+</html>
