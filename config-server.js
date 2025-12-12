@@ -17,7 +17,24 @@ try {
 }
 
 const PORT = process.env.PORT || 3000;
-const CONFIG_FILE = path.join(__dirname, 'config-example.yaml');
+
+// Get config file path from command line args or environment variable
+// Command line: node config-server.js --config=path/to/config.yaml
+// Environment: CONFIG_FILE=path/to/config.yaml node config-server.js
+let configFilePath = process.env.CONFIG_FILE;
+if (!configFilePath) {
+  // Check command line arguments
+  const args = process.argv.slice(2);
+  const configArg = args.find(arg => arg.startsWith('--config='));
+  if (configArg) {
+    configFilePath = configArg.split('=')[1];
+  }
+}
+
+// Default to config-example.yaml if not specified
+const CONFIG_FILE = configFilePath 
+  ? (path.isAbsolute(configFilePath) ? configFilePath : path.join(__dirname, configFilePath))
+  : path.join(__dirname, 'config-example.yaml');
 
 // Track connected WebSocket clients
 const wsClients = new Set();
@@ -65,6 +82,34 @@ function serveFile(filePath, res) {
 function handleGetConfig(req, res) {
   fs.readFile(CONFIG_FILE, 'utf8', (err, data) => {
     if (err) {
+      // If file doesn't exist, create it with empty values
+      if (err.code === 'ENOENT') {
+        const defaultConfig = {
+          spreadsheetURL: '',
+          cellsToVerify: []
+        };
+        
+        const yamlStr = yaml.stringify(defaultConfig, {
+          indent: 2,
+          lineWidth: 0,
+          doubleQuotedAsJSON: false,
+          quoteKeys: false
+        });
+        
+        fs.writeFile(CONFIG_FILE, yamlStr, 'utf8', (writeErr) => {
+          if (writeErr) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to create config file', details: writeErr.message }));
+            return;
+          }
+          
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(defaultConfig));
+        });
+        return;
+      }
+      
+      // Other errors
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: 'Failed to read config file', details: err.message }));
       return;
@@ -228,6 +273,7 @@ if (isWebSocketAvailable) {
 // Start server
 server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Config file: ${CONFIG_FILE}`);
   if (isWebSocketAvailable) {
     console.log(`WebSocket server running on /ws`);
   } else {

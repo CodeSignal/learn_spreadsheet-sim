@@ -38,6 +38,8 @@
       background: var(--Colors-Box-Background);
       border-bottom: 1px solid var(--Colors-Box-Stroke);
       gap: var(--UI-Spacing-spacing-m);
+      height: 80px;
+      box-sizing: border-box;
     }
 
     .header h1 {
@@ -45,10 +47,56 @@
       color: var(--Colors-Text-Body-Strong);
     }
 
+    :root {
+      --header-height: 80px;
+    }
+
     #app {
-      max-width: 1200px;
-      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: min-content 1fr;
+      gap: var(--UI-Spacing-spacing-xl);
       padding: var(--UI-Spacing-spacing-xl);
+      height: calc(100vh - var(--header-height));
+      overflow: hidden;
+    }
+
+    .config-editor {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding-right: var(--UI-Spacing-spacing-m);
+      min-height: 0;
+      height: 100%;
+    }
+
+    .spreadsheet-preview {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .spreadsheet-preview-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--Colors-Box-Background);
+      border: 1px solid var(--Colors-Box-Stroke);
+      border-radius: var(--UI-Radius-radius-s);
+      color: var(--Colors-Text-Body-Light);
+      text-align: center;
+      padding: var(--UI-Spacing-spacing-xl);
+    }
+
+    .spreadsheet-preview iframe {
+      width: 100%;
+      border: 2px solid var(--Colors-Box-Stroke);
+      border-radius: var(--UI-Radius-radius-s);
+      background: var(--Colors-Box-Background);
+      flex: 1;
+      min-height: 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     .config-editor h3 {
