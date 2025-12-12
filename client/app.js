@@ -252,7 +252,7 @@ function render() {
               </button>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--UI-Spacing-spacing-m); margin-bottom: var(--UI-Spacing-spacing-m);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--UI-Spacing-spacing-m);">
               <div>
                 <label style="display: block; margin-bottom: var(--UI-Spacing-spacing-xs); font-weight: 500; font-size: var(--Fonts-Body-Default-sm); color: var(--Colors-Text-Body-Medium);">
                   Cell Name
@@ -375,7 +375,7 @@ function render() {
                 </button>
               </div>
               
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--UI-Spacing-spacing-m); margin-bottom: var(--UI-Spacing-spacing-m);">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--UI-Spacing-spacing-m);">
                 <div>
                   <label style="display: block; margin-bottom: var(--UI-Spacing-spacing-xs); font-weight: 500; font-size: var(--Fonts-Body-Default-sm); color: var(--Colors-Text-Body-Medium);">
                     Cell Name

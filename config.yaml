@@ -2,3 +2,9 @@ spreadsheetURL: https://docs.google.com/spreadsheets/d/1ouStwWebpGQSREQSGpceyg8H
 cellsToVerify:
   - cellName: D2
     expectedValue: "8"
+  - cellName: ""
+    expectedValue: ""
+  - cellName: ""
+    expectedValue: ""
+  - cellName: ""
+    expectedValue: ""
